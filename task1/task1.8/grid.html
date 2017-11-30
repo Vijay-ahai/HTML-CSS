@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="grid.css">
+    <title>网格栅格化布局</title>
+</head>
+<body>
+      <!--1.内层盒子不浮动时，会继承外层盒子的宽度（找到一个最近的宽度已知的祖先容器，继承或自己的宽度），不会继承其高度
+          2.内层盒子浮动时，父子关系维持，但不会继承宽度（需要另外设置宽度）
+          3.本次练习外层盒子padding属性使浏览器左右有间隔
+          4.宽度不同的黑底盒子由于宽度基于白底盒子计算，无法容纳额外的边框距离（否则第一行只能放下两个）
+          5.在黑底盒子中放一个灰底盒子，由于继承关系会继承其宽度，再利用灰底的margin属性撑开距离。
+          总结：盒子浮动时必须给自己一个宽度，确定或者相对于最近一个已知宽度的祖先容器。
+                    不浮动时将继承最近一个已知宽度的祖先容器-->
+      <div class="contain">
+
+          <div class="col-md-4 col-sm-6"><div class="content"></div></div>
+          <div class="col-md-4 col-sm-6"><div class="content"></div></div>
+          <div class="col-md-4 col-sm-12"><div class="content"></div></div>
+          <div class="col-md-3 col-sm-3"><div class="content"></div></div>
+          <div class="col-md-6 col-sm-6"><div class="content"></div></div>
+          <div class="col-md-3 col-sm-3"><div class="content"></div></div>
+          <div class="col-md-1 col-sm-2"><div class="content"></div></div>
+          <div class="col-md-1 col-sm-2"><div class="content"></div></div>
+          <div class="col-md-2 col-sm-8"><div class="content"></div></div>
+          <div class="col-md-2 col-sm-3"><div class="content"></div></div>
+          <div class="col-md-6 col-sm-3"><div class="content"></div></div>
+          <div style="clear: both"></div>
+      </div>
+
+      <div style=";border: 1px solid burlywood">
+          <div style="height: 50px;;background-color: #5a5b5b;"></div>
+      </div>
+</body>
+</html>

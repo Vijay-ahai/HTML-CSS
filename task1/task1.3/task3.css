@@ -1,0 +1,47 @@
+body {
+    background-color: #ffffff;
+}
+div.body{
+    background-color: #D8D8D8;
+    padding: 20px;
+    margin: 20px;
+}
+div.logo{
+    background-color: #ffffff;
+    width:200px;
+    padding: 20px;
+    float: left; ..
+    margin: 20px;
+}
+div.introduce{
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px 220px 0px 300px;
+
+}
+div.photo{
+    background-color: #ffffff;
+    width: 120px;
+    float: right;
+    padding: 20px;
+}
+div.empty{
+    clear: both;
+}
+div.pic{
+    height: 80px;
+    width: 80px;
+    float: left;
+    border-style: solid;
+    border-width: 1px;
+    margin: 10px;
+
+}
+img{
+
+    height: 100%;
+    width: 100%;
+}
+p.name{
+    text-align: right;
+}
