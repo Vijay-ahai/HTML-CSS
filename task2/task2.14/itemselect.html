@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>列表项过滤</title>
+</head>
+<body>
+     <!--
+     1.js中的二维数组可以嵌套定义，引用内层数组需要用二维数组，如aqidata[0][1]为90
+     2.js的数组下标可以为字符串，如 a["北京"]=90;
+     3.字符串的replace函数，返回值为替换后的字符串，不会修改参数的字符串，因此需要用一个空字符串接收返回值。
+     -->
+<h3>污染城市列表</h3>
+<ul id="aqi-list">
+    <!--
+        <li>第一名：福州（样例），10</li>
+          <li>第二名：福州（样例），10</li> -->
+</ul>
+
+<script type="text/javascript">
+
+    var aqiData = [
+        ["北京", 90],
+        ["上海", 50],
+        ["福州", 10],
+        ["广州", 50],
+        ["成都", 90],
+        ["西安", 100]
+    ];
+
+    (function () {
+
+        /*
+        在注释下方编写代码
+        遍历读取aqiData中各个城市的数据
+        将空气质量指数大于60的城市显示到aqi-list的列表中
+        */
+        var list=document.getElementById("aqi-list");
+        var strhtml="<li>{city}</li>";
+        var Html="";
+        for(var i=0;i<aqiData.length;i++){
+            if(aqiData[i][1]>60){
+                Html+=strhtml.replace("{city}",aqiData[i]);
+            }
+
+        }
+        list.innerHTML=Html;
+
+    })();
+
+</script>
+</body>
+</html>
