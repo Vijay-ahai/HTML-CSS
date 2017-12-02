@@ -1,0 +1,33 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>柱状图表渲染</title>
+    <script src="task.js"></script>
+</head>
+    <!--1.getElementByID获取不到对象的原因：html还未加载完毕就执行js函数。
+          在onload中调用初始化函数。
+        2.for in 遍历对象时，e object[e]键值对
+        3.select添加下拉事件：addeventlistenner，change
+        4.只能给一个对象添加事件，不能给对象数组一起添加（可写一个循环）
+        5.鼠标悬停列出详细说明：title属性
+        6.日期Date类的基本使用，getday()返回星期-->
+<body>
+<fieldset id="form-gra-time">
+    <legend>请选择日期粒度：</legend>
+    <label>日<input name="gra-time" value="day" type="radio" checked="checked"></label>
+    <label>周<input name="gra-time" value="week" type="radio"></label>
+    <label>月<input name="gra-time" value="month" type="radio"></label>
+</fieldset>
+
+<fieldset>
+    <legend>请选择查看的城市：</legend>
+    <select id="city-select">
+        <option>北京</option>
+    </select>
+</fieldset>
+
+<div id="div" class="aqi-chart-wrap" >
+</div>
+</body>
+</html>
