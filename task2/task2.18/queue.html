@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟队列</title>
+    <style>
+        input{
+            background-color: white;
+            border-radius: 5px;
+            font-family: 幼圆;
+            color: black;
+        }
+        div.item{
+            background-color: red;
+            color: white;
+            height: 50px;
+            width: 50px;
+            display: inline-block;
+            margin-right: 5px;
+            position: relative;
+        }
+        p{
+            position: absolute;
+            top:0px;
+            left:50%;
+            transform: translateX(-50%);
+        }
+    </style>
+    <!--1.数组concat方法连接两个数组
+        2.shift方法删除第一个元素
+        3.pop方法删除最后一个元素
+        4.splice方法删除指定位置开始指定数量的元素，并可用新元素替代（可选）-->
+</head>
+<body>
+    <input type="text" style="border-radius: 0px" id="key">
+    <input type="button" value="左侧入" onclick="insert(this.value)">
+    <input type="button" value="右侧入" onclick="insert(this.value)">
+    <input type="button" value="左侧出" style="margin-left: 20px"onclick="mydelete(this.value)">
+    <input type="button" value="右侧出" onclick="mydelete(this.value)">
+
+    <div id="wrap-red" ></div>
+</body>
+</html>
+
+<script>
+    var karray=new Array();
+    function insert(positon) {
+        var key=document.getElementById("key").value;
+        console.log("你点击了" + positon + "值为：" + key);
+        if(key == null ||key == ""){
+            alert("请输入合法数值！");
+            return;
+        }
+        if(positon == "左侧入"){
+            var left=new Array(key);
+            karray=left.concat(karray);
+        }
+        else if(positon == "右侧入"){
+            var right=new Array(key);
+            karray=karray.concat(right);
+        }
+       show();
+        document.getElementById("key").value="";
+    }
+    function mydelete(positon) {
+        if(positon == "左侧出"){
+            var left=karray.shift();
+            alert(left + "已删除");
+        }
+        else if(positon == "右侧出"){
+            var right=karray.pop();
+            alert(right + "已删除")
+        }
+        show();
+    }
+    function show() {
+        var content="<div class='item' onclick='del(this)'  ><p >{key}</p></div>";
+        var html="";
+        var wrap=document.getElementById("wrap-red");
+       for(var i=0;i<karray.length;i++){
+           html+=content.replace("{key}",karray[i]);
+           console.log("数组元素" + karray[i]);
+       }
+       wrap.innerHTML=html;
+    }
+    function del(item) {
+        var k=item.innerText;
+       for(var i=0;i<karray.length;i++){
+           if(k==karray[i]){
+               karray.splice(i,1);
+               break;
+           }
+       }
+       show();
+    }
+</script>
