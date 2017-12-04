@@ -13,8 +13,7 @@
         div.item{
             background-color: red;
             color: white;
-            height: 50px;
-            width: 50px;
+            width: 10px;
             display: inline-block;
             margin-right: 5px;
             position: relative;
@@ -32,11 +31,12 @@
         4.splice方法删除指定位置开始指定数量的元素，并可用新元素替代（可选）-->
 </head>
 <body>
-    <input type="text" style="border-radius: 0px" id="key">
+    <input type="text" style="border-radius: 0px" id="key" placeholder="请输入10-60的数">
     <input type="button" value="左侧入" onclick="insert(this.value)">
     <input type="button" value="右侧入" onclick="insert(this.value)">
     <input type="button" value="左侧出" style="margin-left: 20px"onclick="mydelete(this.value)">
     <input type="button" value="右侧出" onclick="mydelete(this.value)">
+    <input type="button" value="排序" onclick="bubble()">
 
     <div id="wrap-red" ></div>
 </body>
@@ -45,10 +45,15 @@
 <script>
     var karray=new Array();
     function insert(positon) {
+        var reg = /^[0-9]+.?[0-9]*$/;
         var key=document.getElementById("key").value;
         console.log("你点击了" + positon + "值为：" + key);
-        if(key == null ||key == ""){
+        if(key == null ||key == "" || key<10 || key>60 || !reg.test(key)){
             alert("请输入合法数值！");
+            return;
+        }
+        else if(karray.length>=60){
+            alert("队列元素过多请先删减！");
             return;
         }
         if(positon == "左侧入"){
@@ -74,11 +79,11 @@
         show();
     }
     function show() {
-        var content="<div class='item' onclick='del(this)'  ><p >{key}</p></div>";
+        var content="<div class='item' onclick='del(this)'  style='height: {height}px;'></div>";
         var html="";
         var wrap=document.getElementById("wrap-red");
        for(var i=0;i<karray.length;i++){
-           html+=content.replace("{key}",karray[i]);
+           html+=content.replace("{height}",karray[i]);
            console.log("数组元素" + karray[i]);
        }
        wrap.innerHTML=html;
@@ -92,5 +97,22 @@
            }
        }
        show();
+    }
+    function bubble() {
+        var length=karray.length;
+        var i,j,temp;
+        for(i=0;i<length;i++)
+            console.log("排序前： " + karray[i] +" ");
+        for(i=0;i<length;i++)
+            for(j=0;j<length-i;j++){
+
+                if(karray[j]>karray[j+1]){
+                    temp=karray[j+1];
+                    karray[j+1]=karray[j];
+                    karray[j]=temp;
+                }
+            }
+
+        show();
     }
 </script>
