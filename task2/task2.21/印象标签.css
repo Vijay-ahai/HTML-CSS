@@ -1,0 +1,43 @@
+div{
+    border: 1px solid black;
+}
+input{
+    background-color: white;
+    border-radius: 5px;
+    font-family: 幼圆;
+    color: black;
+    margin-top: 20px;
+}
+div.item{
+    background-color: #AFEEEE;
+    color: white;
+    padding: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    position: relative;
+}
+div.over{
+    background-color: red;
+    color: white;
+    padding: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    position: relative;
+}
+div.habit{
+    color: white;
+    display: inline-block;
+    padding: 20px;
+    margin-right:5px;
+    background-color: #DEB887;
+}
+p{
+    position: absolute;
+    width: inherit;
+    top:0px;
+    left:50%;
+    transform: translateX(-50%);
+}
+p.tips{
+    position: relative;
+}

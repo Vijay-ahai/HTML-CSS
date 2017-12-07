@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加标签/爱好</title>
+    <link href="印象标签.css" type="text/css" rel="stylesheet">
+    <script src="印象标签.js"></script>
+    <!--1.正则表达式的运用，//声明。[abcd]查找该集合内的元素
+        2.exec返回查找值，test返回真假。
+        3.如何按空格 回车 逗号事件添加？ 键盘事件和input输入事件
+        4.tag如何忽略重复：每次插入前检查是否存在
+        5.删除最前面的元素：array.shift直接改变原数组
+        6.textarea以不同符号作间隔？
+        7.去重：二维遍历，重复就删除。注意splice函数删除会改变数组长度，涉及循环条件更改！
+        8.[醒目]如何利用正则表达式匹配多个不同的字符？递归，对每次分隔的字符数组的每一项查看是否满足正则表达式。-->
+</head>
+<body>
+Tag:<input style="border-radius: 0px;" id="key" placeholder="请输入多个内容并使用相同间隔符！"  onkeypress="enter_add()" oninput="other_add()">
+<br>
+<div id="wrap-red" ></div>
+<textarea type="text" placeholder="请输入兴趣爱好" id="find" cols="50" rows="10"></textarea>
+<br>
+<input type="button" value="确认兴趣爱好" onclick="add()">
+<div id="wrap-habbits"></div>
+
+</body>
+</html>
