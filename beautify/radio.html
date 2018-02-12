@@ -6,6 +6,7 @@
     <style>
         dt{
             float: left;
+            height: 30px;
         }
         dd {
             margin: 0 25px;
@@ -22,6 +23,7 @@
             text-decoration: none;
             color: black;
             position: relative;
+            font-family: 微软雅黑;
         }
         a:hover{
             color: red;
@@ -31,11 +33,14 @@
             background: black url(button.jpg) no-repeat -6px -35px;
         }
         a.checked b{
-            background: black url(button.jpg) no-repeat -6px -35px;
+            background: black url(button.jpg) no-repeat -6px -36px;
         }
+
         #contain{
             margin: 30px auto;
             width: 500px;
+            border: #cccccc solid 1px;
+            padding: 30px;
         }
     </style>
 </head>
@@ -43,11 +48,24 @@
 <div id="contain">
     <dl>
         <dt>Original Language：</dt>
-        <dd><a href="#" class="checked"><b></b>Chinese</a></dd>
-        <dd><a href="#"><b></b>English</a></dd>
-        <dd><a href="#"><b></b>Japanese</a></dd>
+        <dd><a href="#" class="checked" onclick="Checked(0)"><b></b>Chinese</a></dd>
+        <dd><a href="#" onclick="Checked(1)" ><b></b>English</a></dd>
+        <dd><a href="#" onclick="Checked(2)"><b></b>Japanese</a></dd>
     </dl>
+    <div style="clear: both"></div>
 </div>
 
 </body>
 </html>
+<script>
+    function Checked(item) {
+        console.log(item + 1);
+        var a=document.getElementById("contain").getElementsByTagName("a");
+        for(var i=0;i<3;i++){
+            a[i].className="";
+            if(item==i){
+                a[i].className="checked";
+            }
+        }
+    }
+</script>
