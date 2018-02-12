@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        dt{
+            float: left;
+        }
+        dd {
+            margin: 0 25px;
+            float: left;
+        }
+        b{
+            background: black url(button.jpg) no-repeat -6px -6px;
+            position: absolute;
+            margin-left: -30px;
+            width: 30px;
+            height: 30px;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            position: relative;
+        }
+        a:hover{
+            color: red;
+            text-decoration: underline;
+        }
+        a:hover b{
+            background: black url(button.jpg) no-repeat -6px -35px;
+        }
+        a.checked b{
+            background: black url(button.jpg) no-repeat -6px -35px;
+        }
+        #contain{
+            margin: 30px auto;
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+<div id="contain">
+    <dl>
+        <dt>Original Language：</dt>
+        <dd><a href="#" class="checked"><b></b>Chinese</a></dd>
+        <dd><a href="#"><b></b>English</a></dd>
+        <dd><a href="#"><b></b>Japanese</a></dd>
+    </dl>
+</div>
+
+</body>
+</html>
