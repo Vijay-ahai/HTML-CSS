@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>浮动与流体布局</title>
+    <style>
+        .body{
+
+            background-color: white;
+        }
+        #left{
+            width: 56px;
+            height: 56px;
+            background-color: #F0F0F0;
+            float: left;
+            margin-right: 20px;
+        }
+        .right{
+            display: table-cell; width: 9999px;
+        }
+        select{
+            display: inline-block;
+        }
+        #left p{
+            text-align: center;
+
+        }
+    </style>
+</head>
+<body style="background-color: #B0C4DE">
+<div class="body">
+    <div id="left"><p>★</p></div>
+    <div class="right"><p ><a style="color: #3366FF;text-decoration: none" href="#"  >@Kai</a>:孤独の人がこの世界で多いあります。人々は誰かに愛されてほしいです、誰かに理解してほしいです。でも、そんな人が存在しないでしょうか</p></div>
+    <div style="clear: both"></div>
+</div>
+<p style="font-size: 5px">请选择头像大小：
+</p><select onchange="change(this)" >
+    <option value="56px">56px</option>
+    <option valuie="78px">78px</option>
+    <option value="120px">120px</option>
+</select>
+</body>
+</html>
+<script>
+    function change(item) {
+        var head=document.getElementById("left");
+        head.style.width=item.value;
+        head.style.height=item.value;
+        console.log(item.value+" "+head);
+    }
+
+
+</script>
