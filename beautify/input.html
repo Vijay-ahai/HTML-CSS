@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>输入表单美化</title>
+    <style>
+        body{
+            background-color: white;
+            font-family: 微软雅黑;
+            font-size: 15px;
+        }
+        table{
+            margin: 60px auto;
+            padding: 5px;
+            background-color: #F6F6F6;
+        }
+        input{
+            background: url("star.png")  #FFF no-repeat 98%;
+            border-radius: 5px;
+            border: #5a5b5b solid 1px;
+            height: 20px;
+            transition: padding .25s;
+        }
+        input:focus {
+            border: #c00 solid 1px;
+            padding-right: 70px;
+            background-image: url("alert.jpg");
+        }
+        * :focus{
+            outline: none;
+        }
+        tr{
+            border-bottom: #cccccc solid 1px;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <table>
+        <tr><td><label>姓名：</label></td><td><input type="text" placeholder="Kai"></td></tr>
+        <tr><td><label>邮箱：</label></td><td><input type="text" placeholder="Kai@jp.com"></td></tr>
+    </table>
+</div>
+</body>
+</html>
