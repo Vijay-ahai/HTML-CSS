@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下拉表单美化</title>
+    <script src="jquery-3.3.1.min.js">
+
+    </script>
+    <style>
+        body{
+            background-color: #F0F0F0;
+        }
+        #box{
+            width: 500px;
+            height: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -150px 0 0 -250px;
+            background-color: white;
+
+        }
+        #selected{
+            height: 25px;
+            width: 300px;
+            background-color: #cc0000;
+            padding-top: 3px;
+            position: relative;
+            margin: 50px auto;
+
+        }
+        strong{
+            color: white;
+            font-family: 微软雅黑;
+            padding-left: 10px;
+        }
+        #cityselect{
+
+            width: 180px;
+            color: #767777;
+            display: inline-block;
+            cursor: pointer;
+            background:url("arrowdown.jpg") no-repeat 98% white;
+
+        }
+        #contry{
+            position: absolute;
+            top: 10px;
+            left: 0px;
+            margin: 20px auto;
+            display: none;
+            background-color: white;
+            padding-left: 10px;
+        }
+        #contry li{
+            list-style: none;
+            border-bottom: #cccccc 1px solid;
+            margin-top: 5px;
+        }
+        #contry span {
+            padding-left: 20px;
+            cursor: pointer;
+        }
+        #contry span:hover{
+            color: #cc0000;
+            text-decoration: underline;
+        }
+        #selected p{
+            position: absolute;
+            margin: 180px auto;
+            font-size: 15px;
+            color: #cc0000;
+            width: 300px;
+            text-align: center;
+        }
+        #shadow{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            background: #5a5b5b;
+            opacity: 0.5;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box">
+    <div id="selected">
+        <strong>出发地：</strong>
+        <span id="cityselect" onclick="choose()">中国</span>
+        <ul id="contry" style="display: none">
+            <li><b style="color: #cc0000">当季热门</b><span>北海道</span><span>巴厘岛</span><span>黑龙江</span></li>
+            <li><b>亚洲</b><span>中国</span><span>韩国</span><span>日本</span><span>土耳其</span></li>
+            <li><b>东南亚</b><span>泰国</span><span>柬埔寨</span><span>马来西亚</span><span>新加坡</span></li>
+            <li><b>欧洲</b><span>意大利</span><span>英国</span><span>捷克</span><span>俄罗斯</span><span>西班牙</span><span>德国</span><span>英国</span></li>
+            <li><b>美洲</b><span>美国</span><span>加拿大</span><span>墨西哥</span><span>巴西</span></li>
+            <li><b>大洋洲</b><span>澳大利亚</span></li>
+            <li><b>非洲</b><span>埃及</span></li>
+        </ul>
+        <p>ご新年明けましておめでとう。</p>
+    </div>
+
+</div>
+<div id="shadow"></div>
+</body>
+</html>
+<script type="text/javascript">
+    function choose() {
+        var selected=document.getElementById("cityselect");
+        var allcontry=document.getElementById("contry");
+        var shadow=document.getElementById("shadow");
+        if(allcontry.style.display =="none"){
+            allcontry.style.zIndex="11";
+            shadow.style.display="block";
+            allcontry.style.display="block";
+            selected.style.backgroundImage="url(arrowup.jpg)";
+        }
+        else{
+            allcontry.style.display="none";
+            selected.style.backgroundImage="url(arrowdown.jpg)";
+        }
+        selected.style.backgroundImage="arrowup.jpg";
+    }
+    function change() {
+        var name=document.getElementById("cityselect");
+        name.innerText=this.innerText;
+        name.style.color="black";
+        document.getElementById("contry").style.display="none";
+        document.getElementById("shadow").style.display="none";
+        document.getElementById("cityselect").style.backgroundImage="url(arrowdown.jpg)";
+        console.log("choose done");
+    }
+    function nochoose() {
+        document.getElementById("shadow").style.display="none";
+        console.log("nochoose");
+        document.getElementById("contry").style.display="none";
+        document.getElementById("cityselect").style.backgroundImage="url(arrowdown.jpg)";
+    }
+    window.onload=function () {
+        var con=document.getElementById("contry").getElementsByTagName("span");
+        console.log(con.length);
+        for(var i=0;i<con.length;i++){
+            con[i].addEventListener("click",change);
+        }
+        document.getElementById("shadow").addEventListener("click",nochoose);
+    }
+</script>
