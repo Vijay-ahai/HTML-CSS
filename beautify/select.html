@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>下拉表单美化</title>
     <script src="jquery-3.3.1.min.js">
-
     </script>
     <style>
         body{
@@ -48,7 +47,6 @@
             top: 10px;
             left: 0px;
             margin: 20px auto;
-            display: none;
             background-color: white;
             padding-left: 10px;
         }
@@ -116,14 +114,13 @@
         if(allcontry.style.display =="none"){
             allcontry.style.zIndex="11";
             shadow.style.display="block";
-            allcontry.style.display="block";
+            $("#contry").slideDown("slow");
             selected.style.backgroundImage="url(arrowup.jpg)";
         }
         else{
             allcontry.style.display="none";
             selected.style.backgroundImage="url(arrowdown.jpg)";
         }
-        selected.style.backgroundImage="arrowup.jpg";
     }
     function change() {
         var name=document.getElementById("cityselect");
@@ -132,6 +129,8 @@
         document.getElementById("contry").style.display="none";
         document.getElementById("shadow").style.display="none";
         document.getElementById("cityselect").style.backgroundImage="url(arrowdown.jpg)";
+        $("#selected p").animate({fontSize:'30px',margin:'100px auto'},"slow");
+        $("#selected p").animate({fontSize:'15px',margin:'180px auto'},"fast");
         console.log("choose done");
     }
     function nochoose() {
