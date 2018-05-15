@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #body{
+            border: 1px solid #1c1c1c;
+            padding: 0px;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 200px;
+        }
+        div{
+            text-align: center;
+            color: #3366FF;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="body">
+    <canvas id="pic" width="200" height="200" ></canvas>
+    <div>listen to my heart beats...</div>
+</div>
+
+</body>
+<script>
+    var canvas=document.getElementById('pic');
+    var ctx=canvas.getContext('2d');
+    //drawheart(ctx,30);
+   // drawheart(ctx,40);
+    function drawheart(ctx,size,scale){
+
+        ctx.save();
+        ctx.translate(100,100-(15*Math.sqrt(2)));
+        ctx.scale(scale,scale);
+        ctx.rotate(Math.PI/4);
+        ctx.fillStyle="red";
+        ctx.fillRect(0,0,size,size);
+        ctx.rotate(Math.PI*3/4);
+        ctx.save();
+
+        //ctx.translate(((15*Math.sqrt(2))/2)+100,((15*Math.sqrt(2))/2)+100);
+        ctx.beginPath();
+        ctx.fillStyle="red";
+        //ctx.moveTo();
+        ctx.rotate(Math.PI/4);
+        ctx.arc(-size/2,0,size/2,0,Math.PI);
+        //ctx.stroke();
+        ctx.fill();
+        ctx.restore();
+
+        ctx.fillStyle="red";
+        ctx.beginPath();
+        //ctx.moveTo();
+        ctx.rotate(-Math.PI/4);
+        ctx.arc(size/2,0,size/2,0,Math.PI);
+        //ctx.stroke();
+        ctx.fill();
+        ctx.restore();
+
+    }
+
+    //ctx.stroke();
+   /* ctx.beginPath();
+    ctx.arc(100,100,30,0,2*Math.PI);
+    ctx.stroke();*/
+   //canvas.style.opacity='0.1';
+   var con=setInterval(hpop,100);
+    function hpop () {
+
+        var opa=canvas.style.opacity;
+        //console.log(opa);
+        if(opa!=0){
+            canvas.style.opacity=(opa-0.1).toString();
+           // ctx.scale(parseInt(2+opa),parseInt(2+opa));
+            drawheart(ctx,30,1.5);
+            //ctx.clear();
+        }
+        else{
+            canvas.style.opacity='1';
+        }
+
+    }
+
+</script>
+</html>
