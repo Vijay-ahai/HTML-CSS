@@ -2,9 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Floating-code</title>
 </head>
 <body>
-$END$
+<canvas id="canvas"></canvas>
 </body>
+<script>
+    var canvas=document.getElementById('canvas');
+    canvas.innerText="he";
+    var ctx=canvas.getContext('2d')
+    var width=canvas.width=window.innerWidth;
+    var height=canvas.height=window.innerHeight;
+
+    //初始化
+    var shadow='rgba(0,0,0,.1)';
+    var color="red";
+    var words="0123456789qwertyuiopasdfghjklzxcvbnm,./;'\[]QWERTYUIOP{}ASDFGHJHJKL:ZXCVBBNM<>?"
+    var wordsArr=words.split('');
+    var size=16;
+    var clumns=width/size;
+    var drops=[];
+    for(var i=0;i<clumns;i++){
+        drops[i]=1;
+    }
+    function draw() {
+        ctx.save();
+        ctx.fillStyle="#33ff33";
+        ctx.font=size + "px arial";
+        //一个for循环负责绘制一行文字
+        for (var i = 0; i < drops.length; i++){
+            //从文字数组里随机取文字
+            var text = wordsArr[Math.floor(Math.random() * wordsArr.length)];
+            //console.log(text + " " + i);
+            //x=0,16,32,…；y不变(初始化为1）
+            ctx.fillText(text, i * size, drops[i] * size);
+            if (drops[i] * size > height && Math.random() > 0.98){   //超出高度时清零，加入随机是为了保证drop[i]不一致性带来的随机视觉效果
+                drops[i] = 0;
+            }
+            //绘制完成后++，因为下次画时应该换行
+            drops[i]++;
+        }
+        ctx.restore();
+    }
+    (function drawFrame(){
+        window.requestAnimationFrame(drawFrame, canvas);
+        ctx.fillStyle = shadow;
+        ctx.fillRect(0, 0, width, height);  //注意这
+        draw();
+    }())
+</script>
 </html>
