@@ -1,0 +1,130 @@
+body{
+    background-color: #d0d0d0;
+}
+div{
+    margin: 50px 20px;
+}
+/*三角形-矩形变化*/
+#div{
+    width: 0;
+    border-top: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-left:50px solid transparent;
+    border-bottom: 50px solid blue;
+    transform: rotate(90deg);
+    transition: .5s;
+}
+#div:hover{
+    border-top: 0px solid transparent;
+    border-right: 0px solid transparent;
+    border-left:0px solid transparent;
+    border-bottom: 100px solid blue;
+    width: 100px;
+    background-color: #3366FF;
+    transition: .5s;
+}
+/*暂停播放变化*/
+#pause{
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    border-radius: 50%;
+    position: relative;
+}
+#pause:before{
+    content: "";
+    border-top: 10px solid white;
+    transform: rotate(90deg);
+    /* border-left: 50px solid red;
+     border-right:50px solid red;
+     border-bottom: 50px solid white;*/
+    margin: 5px;
+    display: block;
+    transition: .5s;
+    position: absolute;
+    top: 40px;
+    left: 18px;
+    width: 30px;
+
+}
+#pause:after{
+    content: "";
+    border-top: 10px solid white;
+    transform: rotate(90deg);
+    /* border-left: 50px solid red;
+     border-right:50px solid red;
+     border-bottom: 50px solid white;*/
+    margin: 5px;
+    display: block;
+    transition: .5s;
+    position: absolute;
+    top: 40px;
+    left: 43px;
+    width: 30px;
+}
+#pause:hover{
+    background-color: #006600;
+}
+#pause:hover:before{
+    border-top: 25px solid transparent;
+    border-right: 25px solid white;
+    display: block;
+    transition: .5s;
+    top: 5px;
+    left: 20px;
+
+}
+#pause:hover:after{
+    border-top: 25px solid transparent;
+    border-right: 25px solid white;
+    display: block;
+    transition: .5s;
+    top: 45px;
+    left: 35px;
+    transform: rotate(180deg);
+}
+
+/*禁止-通过变化*/
+#forbid{
+    position: relative;
+    background-color: darkred;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+#forbid:before{
+    content: "";
+    display: block;
+    border-top: 25px solid white;
+    transform: rotate(45deg) scale(2.5,0.5);
+    width: 25px;
+    position: absolute;
+    left: 37px;
+    top: 37px;
+    transition: .5s;
+
+}
+#forbid:after{
+    content: "";
+    display: block;
+    border-top: 25px solid white;
+    transform: rotate(-45deg) scale(2.5,0.5);
+    width: 25px;
+    position: absolute;
+    left: 37px;
+    top: 37px;
+    transition: .5s;
+}
+#forbid:hover{
+    background-color: #006600;
+}
+#forbid:hover:before{
+    transform: rotate(-135deg) scale(1,0.5);
+    left: 25px;
+    top: 45px;
+    transition: .5s;
+}
+#forbid:hover:after{
+    transform: rotate(135deg) scale(2,0.5);
+    left: 43px;
+}
