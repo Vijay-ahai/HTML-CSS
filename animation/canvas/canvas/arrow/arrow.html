@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #arrow{
+            background-color: #f1f1f1;
+
+        }
+    </style>
+</head>
+<body>
+<canvas id="arrow" height="500px" width="500px"></canvas>
+</body>
+<script src="arrow.js" ></script>
+<script src="../util.js"></script>
+<script >
+    window.onload=function () {
+        //为鼠标添加移动监听事件
+        let canvas=document.getElementById("arrow");
+        let ctx=canvas.getContext('2d');
+        let arrow=new Arrow(250,250);
+        arrow.draw(ctx);
+        canvas.addEventListener('mousemove',function (e) {
+            //减去箭头中心位置为鼠标相对箭头坐标系中的位置
+            let x=e.pageX-arrow.x;
+            let y=e.pageY-arrow.y;
+            //console.log(e.pageX + " " +e.pageY);
+            let angle=Math.atan2(y,x);
+            ctx.clearRect(0,0,500,500);
+            arrow.rotation=angle;
+            arrow.draw(ctx);
+        });
+
+    }
+</script>
+</html>
