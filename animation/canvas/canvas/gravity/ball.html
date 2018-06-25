@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas{
+            background-color: #1c1c1c;
+        }
+    </style>
+</head>
+<body>
+<canvas id="ball" width="500px" height="500px"></canvas>
+<script src="ball.js"></script>
+<script>
+    window.onload=function () {
+        let canvas=document.getElementById('ball');
+        let ctx=canvas.getContext('2d');
+        let ball=new Ball(20);
+        ball.x=250;
+        ball.y=50;
+        //ball.draw(ctx);
+        //初始速度为0，重力系数,和反弹系数
+        let vy=0;
+        let gravity=0.8;
+        let bounce=-0.8;
+        let isBounce=false;
+        //碰撞检测
+        function checkGround(ball){
+            //console.log(vy + " " + ball.y);
+            if(ball.y + ball.radius > canvas.height){
+                ball.y = canvas.height - ball.radius;
+                vy *= bounce; //速度反向并且减小
+                isBounce=true;
+                console.log(vy);
+
+            }
+            else{
+                isBounce=false;
+            }
+        }
+        (function drawFrame(){
+
+            window.requestAnimationFrame(drawFrame);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            vy += gravity;
+            if(isBounce==true && vy>0){ //如果球被反弹起但是速度不够其上升，则代表球已经处于静止状态，此时可以退出动画
+                ball.draw(ctx);
+                return;
+            }
+            ball.y += vy; //模拟加速度，每次增加的值越来越多
+
+            //碰撞检测
+            checkGround(ball);
+            ball.draw(ctx);
+        }());
+    }
+</script>
+</body>
+</html>
