@@ -39,8 +39,8 @@
     <div id="inner" draggable="true">
         <div id="ok">确认</div>
     </div>
-    <div id="result"></div>
 </div>
+<div id="result"></div>
 </body>
 <script>
     /*
@@ -57,6 +57,7 @@
         let res=document.querySelector('#result');
         box.addEventListener('dragstart',function () {
             event.dataTransfer.setDragImage(span,10,10)
+            ok.style.display='none';
         })
         box.addEventListener('drag',function () {
             console.log([event.pageX,event.pageY]);
