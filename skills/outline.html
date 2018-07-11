@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>outline剪裁图片</title>
+    <style>
+        #wrapper{
+            background-color: #72b16a;
+            width: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+        #inner{
+            width: 100px;
+            height: 100px;
+            outline: 500px solid rgba(0,0,0,0.5);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            cursor: move;
+        }
+        #ok{
+            width: 20px;
+            height:20px;
+            display: none;
+            position: absolute;
+            right: -20px;
+            color: white;
+            bottom: 0;
+        }
+        img{
+            vertical-align: bottom;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <img src="http://t2.hddhhn.com/uploads/tu/201612/357/7.png">
+    <div id="inner" draggable="true">
+        <div id="ok">确认</div>
+    </div>
+    <div id="result"></div>
+</div>
+</body>
+<script>
+    /*
+    利用outlines实现镂空的黑色遮罩：子元素outline较大，父元素overflow：hidden
+    拖动：在dragstart事件中设置拖动显示的图片，去掉默认副本
+    剪裁效果：获取最终元素的位置，设置background-position，注意设置为负数向反方向偏移，正数会让整个图片偏移。
+    剪裁图片和显示的图片大小必须一样，否则剪裁出来不一样
+     */
+    window.onload=function () {
+        let span=new Image();
+        span.src="";
+        let box=document.querySelector('#inner');
+        let ok=document.querySelector("#ok");
+        let res=document.querySelector('#result');
+        box.addEventListener('dragstart',function () {
+            event.dataTransfer.setDragImage(span,10,10)
+        })
+        box.addEventListener('drag',function () {
+            console.log([event.pageX,event.pageY]);
+            if(event.pageX!=0 && event.pageY!=0){
+                box.style.top=(event.pageY-50) +'px';
+                box.style.left=(event.pageX-50) +'px';
+            }
+
+        });
+        box.addEventListener('dragend',function () {
+            ok.style.display='block';
+            console.log('end')
+            console.log([event.pageX,event.pageY])
+        });
+        ok.addEventListener('click',function () {
+            let rect=box.getBoundingClientRect();
+            console.log([box.style.left,box.style.top])
+            res.style.background=`url(http://t2.hddhhn.com/uploads/tu/201612/357/7.png) -${box.style.left} -${box.style.top} no-repeat`;
+            res.style.width='100px';
+            res.style.height='100px';
+        })
+    }
+</script>
+</html>
