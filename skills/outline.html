@@ -9,6 +9,7 @@
             width: 500px;
             position: relative;
             overflow: hidden;
+            display: inline-block;
         }
         #inner{
             width: 100px;
@@ -20,15 +21,20 @@
             cursor: move;
         }
         #ok{
-            width: 20px;
-            height:20px;
             display: none;
             position: absolute;
-            right: -20px;
+            right: -35px;
             color: white;
             bottom: 0;
         }
         img{
+            vertical-align: bottom;
+        }
+        #upload{
+            width: 100px;
+            height: 100px;
+            border: 1px #1c1c1c dotted;
+            display: inline-block;
             vertical-align: bottom;
         }
     </style>
@@ -37,15 +43,20 @@
 <div id="wrapper">
     <img src="http://t2.hddhhn.com/uploads/tu/201612/357/7.png">
     <div id="inner" draggable="true">
-        <div id="ok">确认</div>
+        <span id="ok">确认</span>
     </div>
+</div>
+<div id="upload">
+请将剪裁结果拖拽到此处上传
 </div>
 <div id="result"></div>
 </body>
 <script>
     /*
     利用outlines实现镂空的黑色遮罩：子元素outline较大，父元素overflow：hidden
-    拖动：在dragstart事件中设置拖动显示的图片，去掉默认副本
+    拖动：在dragstart事件中设置拖动显示的图片，去掉默认副本,以及传送的数据
+    放置：在可放置目标利用dragenter，dragover事件去掉默认阻止放置
+    在放置元素drop事件中操作数据
     剪裁效果：获取最终元素的位置，设置background-position，注意设置为负数向反方向偏移，正数会让整个图片偏移。
     剪裁图片和显示的图片大小必须一样，否则剪裁出来不一样
      */
@@ -55,8 +66,9 @@
         let box=document.querySelector('#inner');
         let ok=document.querySelector("#ok");
         let res=document.querySelector('#result');
+        let upload=document.querySelector('#upload');
         box.addEventListener('dragstart',function () {
-            event.dataTransfer.setDragImage(span,10,10)
+            event.dataTransfer.setDragImage(span,10,10);
             ok.style.display='none';
         })
         box.addEventListener('drag',function () {
@@ -73,11 +85,27 @@
             console.log([event.pageX,event.pageY])
         });
         ok.addEventListener('click',function () {
-            let rect=box.getBoundingClientRect();
-            console.log([box.style.left,box.style.top])
             res.style.background=`url(http://t2.hddhhn.com/uploads/tu/201612/357/7.png) -${box.style.left} -${box.style.top} no-repeat`;
             res.style.width='100px';
             res.style.height='100px';
+            res.setAttribute('draggable','true');
+        });
+        res.addEventListener('dragstart',function () {
+            event.dataTransfer.setData('text','#result');
+        })
+        upload.addEventListener('dragenter',function () {
+            event.preventDefault();
+        });
+        upload.addEventListener('dragover',function () {
+            event.preventDefault();
+        })
+        upload.addEventListener('drop',function () {
+            let id=event.dataTransfer.getData('text');
+            let element=document.querySelector(id).cloneNode(true);
+            element.setAttribute('id','');
+            console.log(element)
+            upload.innerHTML="";
+            upload.appendChild(element);
         })
     }
 </script>
