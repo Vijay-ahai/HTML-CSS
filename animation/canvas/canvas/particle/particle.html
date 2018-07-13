@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>文字粒子</title>
+    <script src="particle.js"></script>
+    <script src="shape.js"></script>
+    <style>
+        canvas{
+            border: 1px solid #cccccc;
+        }
+    </style>
 </head>
 <body>
-$END$
+<canvas id="canvas" width="600px" height="600px"></canvas>
 </body>
+<script>
+    window.onload=function () {
+        let canvas=document.getElementById('canvas');
+        let ctx=canvas.getContext('2d');
+        let shape=new Shape(canvas.width/2,canvas.height/2,'宗蔚');
+        shape.getValue(ctx,canvas.width,canvas.height);
+        let particle=new Particle('square');
+        particle.draw(shape.placement,ctx);
+        (function doFrame() {
+            window.requestAnimationFrame(doFrame,canvas);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particle.breath(ctx);
+
+
+        })()
+    }
+</script>
 </html>
