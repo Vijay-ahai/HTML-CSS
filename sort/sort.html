@@ -2,9 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>排序算法</title>
+    <style>
+        .item{
+            width: 30px;
+            display: inline-block;
+            margin: 0 10px 0 10px;
+            color: white;
+            text-align: center;
+            vertical-align: bottom;
+        }
+        button{
+            background-color: #cc7680;
+            color: white;
+            border-radius: 20px;
+            border-style: none;
+            cursor: pointer;
+        }
+        .disable{
+            background-color: #5a5b5b;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
-$END$
+<div id="body">
+    <div>
+        <label>插入类排序</label>
+        <button id="insert">插入排序</button>
+        <button id="shell">希尔排序</button>
+    </div>
+    <div>
+        <label>交换类排序</label>
+        <button class="disable">冒泡排序</button>
+        <button id="quick">快速排序</button>
+    </div>
+    <p>点击按钮进行排序，细节查看console控制台</p>
+    <div id="init"></div>
+</div>
 </body>
+<script src="insert/insert.js"></script>
+<script src="insert/shell.js"></script>
+<script src="swap/quick.js"></script>
+<script>
+    window.onload=function () {
+        //初始化待排序数组
+        let colors=['#8d6449','#d0af4c','#00a497','#44617b','#b55233','#84a2d4','#d3cbc6','#c53d43','#dccb18','#82ae46'];
+        let arr=[15,9,45,8,3,78,54,1,99,17];
+        let insert=document.getElementById('insert');
+        let shell=document.getElementById('shell');
+        let quick=document.getElementById('quick');
+        //添加点击事件
+        insert.addEventListener('click',function () {
+            insertSort(arr,colors,showRes);
+        });
+        shell.addEventListener('click',function () {
+            shellSort(arr,colors,showRes)
+        })
+        quick.addEventListener('click',function () {
+            quickSort(arr,0,arr.length-1,colors,showRes)
+        })
+        showRes(arr,colors)
+        console.log('原始数组：')
+        console.log(arr);
+
+
+
+    }
+    function showRes(arr,colors) {
+        let div=document.getElementById('init');
+        let html='';
+        for(let i in arr){
+            html+=`<div class="item" style="background-color: ${colors[i]};height: ${arr[i]}px;">${arr[i]}</div>`
+        }
+        div.innerHTML=html;
+    }
+</script>
 </html>
