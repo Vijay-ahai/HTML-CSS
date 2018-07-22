@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>水波纹</title>
+    <script src="ripple.js"></script>
 </head>
 <body>
-$END$
+<canvas id="canvas" width="600px" height="600px"></canvas>
+
 </body>
+<script>
+    window.onload=function () {
+        let canvas=document.getElementById('canvas');
+        let ctx=canvas.getContext('2d');
+        let ripple=new Ripple(600,600,ctx,0.5);
+        //ripple.draw(0.05,20,0);
+        ripple.move();
+    }
+</script>
 </html>
