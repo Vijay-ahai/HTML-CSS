@@ -2,9 +2,127 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>输入粒子特效</title>
+    <style>
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url("./timg.jpeg") no-repeat 50% 50%;
+        }
+        #wrap{
+            position: relative;
+        }
+        #label,#input{
+            display: inline-block;
+        }
+        #label{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            visibility: hidden;
+        }
+        #input{
+            width: 30vw;
+            height: 5vw;
+            background-color: rgba(0,0,0,0.1);
+            border-radius: 20px;
+            border: 1px solid #f1f1f1;
+            outline: none;
+        }
+        #canvas{
+            user-select: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .slogan{
+            text-align: center;
+            color: #494949;
+            font-size: .5vw;
+        }
+    </style>
 </head>
 <body>
-$END$
+<canvas id="canvas"></canvas>
+<div id="wrap">
+    <label id="label"></label>
+    <input id="input" placeholder="请输入内容">
+    <p class="slogan">"就决定是你了。"</p>
+</div>
+
 </body>
+<script>
+    window.onload=function () {
+        let label=document.querySelector('#label');
+        let input=document.querySelector('#input');
+        let canvas=document.querySelector('#canvas');
+        canvas.width=document.body.clientWidth
+        canvas.height=document.body.clientHeight
+        let ctx=canvas.getContext('2d');
+        //全局变量
+        let particles=[];
+        let labelRect,inputRect,point;
+        let colors=["#44cef6","#c9dd22","#ffa400","#c32136"]
+        input.addEventListener('input',function () {
+            //每次输入生成5个粒子
+            if(particles.length>80){
+                particles.length=0;
+            }
+            for(let i =0;i<5;i++){
+                label.innerHTML=input.value
+                labelRect=label.getBoundingClientRect();
+                inputRect=input.getBoundingClientRect();
+                point=[labelRect.width + inputRect.left,labelRect.height + inputRect.bottom];
+                let particle=new Particle(ctx,{
+                    point:point,
+                    color:colors[Math.floor(Math.random()*4)],
+                });
+                particles.push(particle);
+            }
+
+        });
+        (function animation() {
+            ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+            particles.forEach(item=>{
+                //debugger
+                item.draw();
+            })
+            window.requestAnimationFrame(animation);
+        })()
+
+    }
+    function Particle(ctx,options) {
+        this.ctx=ctx;
+        this.point=options.point;
+        this.color=options.color;
+        this.life=50 + Math.random()*5;
+        this.remainLife=this.life;
+        this.speed={
+            x:-5 + Math.random()*10,
+            y:-5 + Math.random()*10
+        }
+        this.radius=10 + Math.random();
+    }
+    Particle.prototype.draw=function () {
+        let ctx=this.ctx;
+        let point=this.point;
+        if(this.remainLife>0 && this.radius>0){
+            ctx.save();
+            ctx.fillStyle=this.color;
+            ctx.beginPath();
+            ctx.arc(point[0],point[1],this.radius,0,Math.PI*2);
+            ctx.fill();
+            ctx.restore();
+
+            //更新生命和位置
+            this.remainLife--;
+            this.point[0]+=this.speed.x;
+            this.point[1]+=this.speed.y;
+            this.radius-=0.5
+        }
+    }
+
+</script>
 </html>
