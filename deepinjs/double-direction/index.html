@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>简单双向数据绑定</title>
+    <script src="require/watch.js"></script>
+    <script src="require/compile.js"></script>
+    <script src="require/observe.js"></script>
+    <script src="require/kai.js"></script>
 </head>
 <body>
-$END$
+<div id="app">
+    <input k-model="title">
+    <p>{{title}}</p>
+</div>
 </body>
+<script>
+    window.onload=function () {
+        let vm=new Kai({
+            el:'#app',
+            data:{
+                title:'Hello Kai'
+            }
+        })
+    }
+</script>
 </html>
